@@ -9,8 +9,8 @@ before_script:
   - docker build -t back .
 
 after_success:
-  - docker login -u $DOCKERHUB_USERNAME -p DOCKER_PASSWORD
-  - docker tag back $DOCKERHUB_USERNAME/back:$TRAVIS_BUILD_NUMBER
-  - docker push $DOCKERHUB_USERNAME/back:$TRAVIS_BUILD_NUMBER
-  - docker tag back $DOCKERHUB_USERNAME/back:latest
-  - docker push $DOCKERHUB_USERNAME/back:latest
+  - docker login -u $DOCKER_USER -p DOCKER_PASSWORD
+  - docker tag back $DOCKER_USER/back:$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKER_USER/back:$TRAVIS_BUILD_NUMBER
+  - docker tag back $DOCKER_USER/back:latest
+  - docker push $DOCKER_USER/back:latest
