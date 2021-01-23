@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "14"
+sudo: required
+services:
+  - docker
+before_script:
+  - npm test
+  - docker build -t back .
+
+after_success:
+  - docker login -u $DOCKERHUB_USERNAME -p DOCKERHUB_TOKEN
+  - docker tag back $DOCKERHUB_USERNAME/back:$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKERHUB_USERNAME/back:$TRAVIS_BUILD_NUMBER
+  - docker tag back $DOCKERHUB_USERNAME/back:latest
+  - docker push $DOCKERHUB_USERNAME/back:latest
